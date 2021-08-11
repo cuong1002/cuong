@@ -9,8 +9,8 @@ module.exports.config = {
 
 module.exports.run = async function({ api, event, global, client }) {
 	if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
-		api.changeNickname(`[ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "Made by CatalizCS and SpermLord" : global.config.BOTNAME}`, event.threadID, api.getCurrentUserID());
-		return api.sendMessage(`Đã kết nối thành công với bot của Thoả! Sử dụng !help để biết các lệnh của bot.\nCảm ơn đã sử dụng bot UwU <3`, event.threadID);
+		api.changeNickname(`[ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "CUONG" : global.config.BOTNAME}`, event.threadID, api.getCurrentUserID());
+		return api.sendMessage(`Đã kết nối thành công với bot của CUONG! Sử dụng !help để biết các lệnh của bot.\nCảm ơn đã sử dụng bot UwU <3`, event.threadID);
 	}
 	else {
 		const { createReadStream, existsSync, mkdirSync } = require("fs-extra");
@@ -29,7 +29,7 @@ module.exports.run = async function({ api, event, global, client }) {
 		}
 		memLength.sort((a, b) => a - b);
 		
-		(typeof settings.customJoin == "undefined") ? msg = "Xin chào {name}.\nChào mừng mày đã đến với {threadName}.\n{type} là thành viên thứ {soThanhVien} của nhóm 🥳, Tương tác hoặc bay acc😎" : msg = settings.customJoin;
+		(typeof settings.customJoin == "undefined") ? msg = "Xin chào {name}.\nChào mừng bạn đã đến với {threadName}.\n{type} là thành viên thứ {soThanhVien} của nhóm 🥳, Tương tác hoặc bay acc😎" : msg = settings.customJoin;
 		msg = msg
 		.replace(/\{name}/g, nameArray.join(', '))
 		.replace(/\{type}/g, (memLength.length > 1) ?  'các bạn' : 'bạn')
