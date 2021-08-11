@@ -13,7 +13,7 @@ module.exports.run = async function({ api, event, Users, Threads, client }) {
 	let settings = client.threadSetting.get(event.threadID) || {};
 	let name = (await Users.getData(event.logMessageData.leftParticipantFbId)).name || (await api.getUserInfo(event.logMessageData.leftParticipantFbId))[event.logMessageData.leftParticipantFbId].name
 	let type = (event.author == event.logMessageData.leftParticipantFbId) ? "tự rời" : "bị quản trị viên đá";
-	(typeof settings.customLeave == "undefined") ? msg = "Con vợ {name} vì không tán đổ em nào nên đã {type} khỏi nhóm, Bye em nhé❤" : msg = settings.customLeave;
+	(typeof settings.customLeave == "undefined") ? msg = "Bạn {name} đã {type} khỏi nhóm " : msg = settings.customLeave;
 	msg = msg
 	.replace(/\{name}/g, name)
 	.replace(/\{type}/g, type);
