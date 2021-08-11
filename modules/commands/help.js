@@ -29,8 +29,7 @@ module.exports.run = function({ api, event, args, client, global }) {
 			else group.find(item => item.group.toLowerCase() == commandConfig.config.commandCategory.toLowerCase()).cmds.push(commandConfig.config.name);
 		}
 		group.forEach(commandGroup => msg += `❤ ${commandGroup.group.charAt(0).toUpperCase() + commandGroup.group.slice(1)} ❤\n${commandGroup.cmds.join(', ')}\n\n`);
-		return api.sendMessage(msg + `[ Sử dụng: "${(threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX}help từng lệnh ở trên" để xem chi tiết cách sử dụng! | Hiện tại đang có ${client.commands.size} lệnh có thể sử dụng trên bot này. 
-👉 Liên hệ admin Phan Quang Thoả để biết thêm thông tin về bot | www.facebook.com/profile.php?id=100051303636300 ❤UwU❤ ]`, event.threadID);
+		return api.sendMessage(msg + `[ Sử dụng: "${(threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX}help từng lệnh ở trên" để xem chi tiết cách sử dụng! | Hiện tại đang có ${client.commands.size} lệnh `, event.threadID);
 
 	}
 
