@@ -11,6 +11,7 @@ module.exports.config = {
 };
 
 module.exports.makeRankCard = async (data) => {    
+
     /*
     * 
     * Remake from Canvacord
@@ -25,7 +26,7 @@ module.exports.makeRankCard = async (data) => {
 	const request = require('node-superfetch');
 	const PI = Math.PI;
 
-    const { id, name, rank, level, expCurrent, expNextLevel } = data;
+    const { id, name, rank, level, expCurrent, expNextLevel,threadID } = data;
 
 	Canvas.registerFont(__root + "/fonts/regular-font.ttf", {
 		family: "Manrope",
@@ -39,12 +40,15 @@ module.exports.makeRankCard = async (data) => {
 	});
 
 	let rankCard = await Canvas.loadImage(__root + "/rank_card/rankcard.png");
+
+
+	
 	const pathImg = __root + `/rank_card/rank_${id}.png`;
 	
 	var expWidth = (expCurrent * 615) / expNextLevel;
 	if (expWidth > 615 - 18.5) expWidth = 615 - 18.5;
 	
-	var avatar = await request.get(`https://graph.facebook.com/${id}/picture?width=512&height=512&access_token=170918394587449|sONjQBBNs316xVD31T-yuL4jfyc`);
+	var avatar = await request.get(`https://graph.facebook.com/${id}/picture?width=512&height=512&access_token=170440784240186|bc82258eaaf93ee5b9f577a8d401bfc9`);
 
 	avatar = await this.circle(avatar.body);
 
@@ -52,29 +56,31 @@ module.exports.makeRankCard = async (data) => {
 	const ctx = canvas.getContext("2d");
 
 	ctx.drawImage(rankCard, 0, 0, canvas.width, canvas.height);
-	ctx.drawImage(await Canvas.loadImage(avatar), 45, 50, 180, 180);
+	ctx.drawImage(await Canvas.loadImage(avatar), 55, 50, 180, 180);
 
 	ctx.font = `bold 36px Manrope`;
-	ctx.fillStyle = "#FFFFFF";
+	ctx.fillStyle = "#ffc220";
 	ctx.textAlign = "start";
 	ctx.fillText(name, 270, 164);
+	ctx.fillStyle = "#ed52a3";
+	ctx.fillText("Dream House 🤴👸",294, 38)
 	ctx.font = `36px Manrope`;
-	ctx.fillStyle = "#FFFFFF";
+	ctx.fillStyle = "#ffffff";
 	ctx.textAlign = "center";
 
 	ctx.font = `bold 32px Manrope`;
-	ctx.fillStyle = "#FFFFFF";
+	ctx.fillStyle = "#ffc220";
 	ctx.textAlign = "end";
-	ctx.fillText(level, 934 - 55, 82);
-	ctx.fillStyle = "#FFFFFF";
-	ctx.fillText("Lv.", 934 - 55 - ctx.measureText(level).width - 10, 82);
+	ctx.fillText(level, 934 - 77, 82);
+	ctx.fillStyle = "#ffc220";
+	ctx.fillText("Cấp.", 934 - 55 - ctx.measureText(level).width - 29, 82);
 
 	ctx.font = `bold 32px Manrope`;
-	ctx.fillStyle = "#FFFFFF";
+	ctx.fillStyle = "#feff73";
 	ctx.textAlign = "end";
-	ctx.fillText(rank, 934 - 55 - ctx.measureText(level).width - 16 - ctx.measureText(`Lv.`).width - 25, 82);
-	ctx.fillStyle = "#FFFFFF";
-	ctx.fillText("#", 934 - 55 - ctx.measureText(level).width - 16 - ctx.measureText(`Lv.`).width - 16 - ctx.measureText(rank).width - 16, 82);
+	ctx.fillText(rank, 934 - 55 - ctx.measureText(level).width - 38 - ctx.measureText(`Lv.`).width - 25, 82);
+	ctx.fillStyle = "#fd5353";
+	ctx.fillText("Top", 934 - 55 - ctx.measureText(level).width - 16 - ctx.measureText(`Lv.`).width - 16 - ctx.measureText(rank).width - 40, 82);
 
 	ctx.font = `bold 26px Manrope`;
 	ctx.fillStyle = "#FFFFFF";
@@ -84,7 +90,7 @@ module.exports.makeRankCard = async (data) => {
 	ctx.fillText(expCurrent, 710, 164);
 
 	ctx.beginPath();
-	ctx.fillStyle = "#4283FF";
+	ctx.fillStyle = "#ffffff";
 	ctx.arc(257 + 18.5, 147.5 + 18.5 + 36.25, 18.5, 1.5 * PI, 0.5 * PI, true);
 	ctx.fill();
 	ctx.fillRect(257 + 18.5, 147.5 + 36.25, expWidth, 37.5);
